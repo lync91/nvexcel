@@ -176,7 +176,7 @@ class App extends Component<{}, AppState> {
                 <Menu
                   mode="inline"
                   openKeys={this.state.openKeys}
-                  onOpenChange={this.onOpenChange}
+                  // onOpenChange={this.onOpenChange}
                   onSelect={this.onSelect}
                 >
                   <SubMenu
