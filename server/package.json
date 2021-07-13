@@ -29,6 +29,7 @@
     "graphql": "^14.2.1",
     "graphql-tools": "^4.0.4",
     "mongoose": "^5.5.1",
+    "office-addin-dev-certs": "^1.6.1",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
