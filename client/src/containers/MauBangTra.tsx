@@ -2,32 +2,18 @@ import React, { Component } from "react";
 import {
 	Select,
 	Form,
-	Input,
 	Button,
 	Tabs,
 	AutoComplete,
-	message,
 	Empty,
-	List,
-	Skeleton,
-	Avatar,
-	Table
 } from 'antd';
-import { PlusOutlined } from "@ant-design/icons";
 import { FormInstance } from 'antd/lib/form';
-import { ws, ee } from "../api/nvExcel";
-import { initBangTienLuong } from "../api/libKhoiLuong";
+import { ws } from "../api/nvExcel";
 import {
-	TIEN_LUONG_SHEET_NAME,
-	KHU_VUC_NAME,
 	DON_GIA_NAME
 } from "../constants/named";
 import { MAU_BANG_TRA_OBJECT } from "../constants/values";
-import { listCP } from "../constants/templates"
-import { WORKSHEET_SELECTION_CHANGED } from "../constants/eventName";
-// import socket from "../socket";
-import { addressObj } from "../api/Eutils";
-import { waterfall } from "async";
+import { listCP } from "../constants/templates";
 
 const formRef = React.createRef<FormInstance>();
 

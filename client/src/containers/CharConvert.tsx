@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Form, Button, Select } from "antd";
 import { FormInstance } from 'antd/lib/form';
 import { ws } from "../api/nvExcel";
-import { addressTypes } from "../api/types";
-import { addressObj } from "../api/Eutils";
+// import { addressTypes } from "../api/types";
+// import { addressObj } from "../api/Eutils";
 // import { connect } from "react-redux";
 // import { CHANGE_SRC_KEY, CHANGE_DESC_KEY } from "../constants/actions";
 import {convertTo} from "../api/vietuni_vn";
@@ -49,7 +49,7 @@ export class CharConvert extends Component<AppProps, AppStates> {
 	_convertTo = async () => {
 		await ws.getActive().then(async x => {
 			const lastRow = await ws.getLastRow();
-			const lastCol = await ws.getLastRow();
+			// const lastCol = await ws.getLastRow();
 			const addr = `A1:AZ${lastRow.cell1.row}`;
 			const values: any[][] = await ws.getFomulas(addr);
 			const text: string = convertTo(JSON.stringify(values), this.state.srcKey, this.state.descKey);

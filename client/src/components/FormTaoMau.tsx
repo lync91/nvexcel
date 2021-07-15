@@ -1,7 +1,7 @@
 import { Form, AutoComplete, Input, Button, message } from "antd";
 import React from "react"
 import { FormInstance } from 'antd/lib/form';
-import { useQuery, useMutation, gql, ApolloConsumer } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import { ws } from "../api/nvExcel";
 
 const CREATE_MKL = gql`
@@ -26,11 +26,12 @@ const _onCompleted = () => {
 
 
 const FormTaoMau = ({ onFinish }: any) => {
-  const [createMauKhoiLuong, {data, loading, called}] = useMutation(CREATE_MKL, {onCompleted: _onCompleted});
+  const [createMauKhoiLuong, {data}] = useMutation(CREATE_MKL, {onCompleted: _onCompleted});
   return (
     <Form ref={formRef} onFinish={async (values: any) => {
       const res = await _getValues();
       values.data = res;
+      console.log(data);
       createMauKhoiLuong({ variables: values});
       
       // createMauKhoiLuong({ variables: { type: input.value } })

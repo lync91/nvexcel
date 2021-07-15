@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { Select, Form, Button, Checkbox } from 'antd';
-import { addressTypes } from "../api/types";
+import { Form, Button, Checkbox } from 'antd';
+// import { addressTypes } from "../api/types";
 import { ws } from "../api/nvExcel";
 import {
 	BANG_CONG_TRINH,
 	BANG_TONG_HOP_VAT_TU,
 	BANG_HAO_PHI_VAT_TU,
-	HAO_PHI_VAT_TU_NAME,
+	// HAO_PHI_VAT_TU_NAME,
 	GIA_THANG_G8,
 	CHIET_TINH_G8,
 	DU_THAU_G8,
 	GIA_TONG_HOP_G8,
-	GIA_CHI_TIET_G8
+	// GIA_CHI_TIET_G8
 } from "../constants/named";
 
 export interface AppProps {

@@ -38,18 +38,18 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-scroll-to-bottom": "^4.1.2",
     "redux": "^4.0.5",
     "socket.io-client": "^2.3.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start-test": "office-addin-debugging start ../manifest.xml",
+    "dev": "office-addin-debugging start ../manifest.xml",
     "start": "react-scripts start host=0.0.0.0",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-dev": "HTTPS=true SSL_CRT_FILE=../certs/localhost.crt SSL_KEY_FILE=../certs/localhost.key npm start",
-    "dev-local": "HTTPS=true SSL_CRT_FILE=../cert/server.crt SSL_KEY_FILE=../cert/server.key npm start"
+    "start-dev": "HTTPS=true SSL_CRT_FILE=../certs/localhost.crt SSL_KEY_FILE=../certs/localhost.key npm start"
   },
   "config": {
     "app_to_debug": "excel",

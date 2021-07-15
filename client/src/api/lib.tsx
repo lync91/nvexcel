@@ -25,6 +25,6 @@ export async function addrParser(addr: string, values: any[][]) {
     const endColNum: number = startCol + values[0].length - 1;
     const str = addr.match(/([.0-9])*\d/g)
     const endRowNum: number = parseInt(str![0]) + values.length - 1
-    const colLetter = toLetter(endColNum);
+    // const colLetter = toLetter(endColNum);
     return `${addr}:${toLetter(endColNum)}${endRowNum}`
 }

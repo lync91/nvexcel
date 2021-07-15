@@ -1,4 +1,4 @@
-import React, { Component, useCallback } from "react";
+import React, { Component } from "react";
 import {
 	Select,
 	Form,
@@ -6,18 +6,16 @@ import {
 	Button,
 	Tabs,
 	AutoComplete,
-	message,
 	Empty,
 	List,
 	Skeleton,
-	Avatar,
 	Table
 } from 'antd';
 import { PlusOutlined } from "@ant-design/icons";
 import { FormInstance } from 'antd/lib/form';
-import { useQuery, gql, ApolloConsumer } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import { ws, ee } from "../api/nvExcel";
-import { initBangTienLuong } from "../api/libKhoiLuong";
+// import { initBangTienLuong } from "../api/libKhoiLuong";
 import {
 	TIEN_LUONG_SHEET_NAME,
 	KHU_VUC_NAME,
@@ -27,7 +25,6 @@ import { tbBANGTONGHOPKHOILUONG } from "../constants/templates";
 import { WORKSHEET_SELECTION_CHANGED } from "../constants/eventName";
 // import socket from "../socket";
 import { addressObj } from "../api/Eutils";
-
 const formRef = React.createRef<FormInstance>();
 
 // const EXCHANGE_RATES = gql`
@@ -125,10 +122,10 @@ export class TienLuong extends Component<AppProps, AppStates> {
 	}
 
 	async componentDidMount() {
-		const { loading, error, data } = await useQuery(EXCHANGE_RATES, {
-			pollInterval: 0,
-		});
-		console.log(data);
+		// const { loading, error, data } = await useQuery(EXCHANGE_RATES, {
+		// 	pollInterval: 0,
+		// });
+		// console.log(data);
 		
 		this.prepair()
 		if (ws?.projectInfo[KHU_VUC_NAME]) {
@@ -205,8 +202,8 @@ export class TienLuong extends Component<AppProps, AppStates> {
 	}
 
 	async _selectDinhMuc(value: any) {
-		const values: any = formRef.current?.getFieldsValue();
-		ws.updateProjectInfo(DON_GIA_NAME, values.donGia);
+		const values: any = formRef.current!.getFieldsValue();
+		ws.updateProjectInfo(DON_GIA_NAME, values ? values.donGia : '');
 		console.log('OK');
 
 	}
@@ -230,19 +227,19 @@ export class TienLuong extends Component<AppProps, AppStates> {
 				title: 'Mã hiệu',
 				dataIndex: 'MHDG',
 				key: 'MHDG',
-				render: (text: any) => <a>{text}</a>,
+				render: (text: any) => <>{text}</>,
 			},
 			{
 				title: 'Tên công tác',
 				dataIndex: 'TCV',
 				key: 'TCV',
-				render: (text: any) => <a>{text}</a>,
+				render: (text: any) => <>{text}</>,
 			},
 			{
 				title: 'Đơn vị',
 				dataIndex: 'DVT',
 				key: 'DVT',
-				render: (text: any) => <a>{text}</a>,
+				render: (text: any) => <>{text}</>,
 			},
 		]
 		return (
@@ -370,7 +367,7 @@ function Home() {
 	// 		<h2>{JSON.stringify('data')}</h2>
 	// 	</div>
 	// );
-	const { loading, error, data } = useQuery(EXCHANGE_RATES);
+	const { loading } = useQuery(EXCHANGE_RATES);
 	  if (loading) return <p>Loading ...</p>;
 	  return <h1>Hello!</h1>;
 }

@@ -4,8 +4,8 @@ import { MAU_KHOI_LUONG_NAME, TIEN_LUONG_SHEET_NAME } from "../constants/named";
 import { WORKSHEET_SELECTION_CHANGED } from "../constants/eventName";
 import { isString } from 'util';
 import { AUTO_STT_FOMULA } from "../constants/values";
-import { evaluate, parse } from "mathjs";
-import { EventEmitter } from "events";
+import { evaluate } from "mathjs";
+// import { EventEmitter } from "events";
 
 export async function sheetChanged(event: any) {
     console.log(event);

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { Input, Button, Form, Select } from 'antd';
+import { Input, Button, Form } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { ws } from "../api/nvExcel";
-import { columnIndex, toLetter } from "../api/lib";
-import {
-	BANG_CONG_TRINH,
-	BANG_TONG_HOP_VAT_TU,
-	BANG_HAO_PHI_VAT_TU,
-	HAO_PHI_VAT_TU_NAME
-} from "../constants/named";
+import { columnIndex } from "../api/lib";
+// import {
+// 	BANG_CONG_TRINH,
+// 	BANG_TONG_HOP_VAT_TU,
+// 	BANG_HAO_PHI_VAT_TU,
+// 	HAO_PHI_VAT_TU_NAME
+// } from "../constants/named";
 
 const formRef = React.createRef<FormInstance>();
 
@@ -54,11 +54,11 @@ export class OtherTools extends Component<AppProps, AppStates> {
 		const wsValues: any[][] = await ws?.getValues(addr);
 		await ws?.addSheet('Test');
 		const cotSTTIndex = columnIndex(values.cotSTT);
-		const cotSoBanVeIndex = columnIndex(values.cotSoBanVe);
-		const cotMaHieuIndex = columnIndex(values.cotMaHieu);
-		const cotTenCongTacIndex = columnIndex(values.cotTenCongTac);
-		const cotDonViIndex = columnIndex(values.cotDonVi);
-		const cotKhoiLuongIndex = columnIndex(values.cotKhoiLuong);
+		// const cotSoBanVeIndex = columnIndex(values.cotSoBanVe);
+		// const cotMaHieuIndex = columnIndex(values.cotMaHieu);
+		// const cotTenCongTacIndex = columnIndex(values.cotTenCongTac);
+		// const cotDonViIndex = columnIndex(values.cotDonVi);
+		// const cotKhoiLuongIndex = columnIndex(values.cotKhoiLuong);
 		const klFomulas = wsValues.map((item, index) => {
 			const sttVal = item[cotSTTIndex - 1];
 			const stt = `='${sourceName}'!${values.cotSTT}${Number(values.dongBatDau) + index}`;

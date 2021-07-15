@@ -28,24 +28,24 @@ const initKeys = function() {
   }
 }
 function telexingVietUC (txtarea) {
-  txtarea.vietarea= true;
-  txtarea.onkeyup= null;
+  txtarea.vietarea = true;
+  txtarea.onkeyup = null;
   if (!supported) return;
-  txtarea.onkeypress= vietTyping;
-  txtarea.getCurrentWord= getCurrentWord;
-  txtarea.replaceWord= replaceWord;
-  txtarea.onkeydown= onKeyDown;
-  txtarea.onmousedown= onMouseDown;
+  txtarea.onkeypress = vietTyping;
+  txtarea.getCurrentWord = getCurrentWord;
+  txtarea.replaceWord = replaceWord;
+  txtarea.onkeydown = onKeyDown;
+  txtarea.onmousedown = onMouseDown;
   if(!theTyper) theTyper = new CVietString("");
 }
 function getEvt(evt) {
-  if (typeof(evt)=='string') return evt.charCodeAt(0);
+  if (typeof(evt)==='string') return evt.charCodeAt(0);
   return document.all? event.keyCode: (evt && evt.which)? evt.which: 0;
 }
 function onKeyDown(evt) {
   var c= getEvt(evt);
-  if ((c==10) || (c==13)) { reset(1); linebreak= 1; }
-  else if ((c<49) && (c!=16) && (c!=20)) { linebreak= 0; reset(c==32); }
+  if ((c===10) || (c===13)) { reset(1); linebreak= 1; }
+  else if ((c<49) && (c!==16) && (c!==20)) { linebreak= 0; reset(c===32); }
   return true;
 }
 function onMouseDown(evt) { reset(0); linebreak= 0; return true; }
@@ -64,7 +64,7 @@ function getCurrentWord() {
   do {
     var caret2 = caret.duplicate();
     caret2.moveStart("character", backward++);
-  } while (caret2.parentElement() != this && backward <0);
+  } while (caret2.parentElement() !== this && backward <0);
   this.curword = caret2.duplicate();
   return caret2.text;
 }
@@ -97,12 +97,12 @@ function Compose(type) {
   var info = this.findCharToChange(type);
   if (!info || !info[0]) return;
   var telex;
-  if (info[0]=='\\') telex= [1,this.ctrlchar,1];
+  if (info[0]==='\\') telex= [1,this.ctrlchar,1];
   else if (type>6) telex= this.charmap.getAEOWD(info[0], type, info[3]);
   else telex= this.charmap.getDau(info[0], type);
   if (!(this.changed = telex[0])) return;
   this.value = this.value.replaceAt(info[1],telex[1],info[2]);
-  if (!telex[2]) { spellerror= 1; this.value+= this.ctrlchar; }
+  if (!telex[2]) { spellerror = 1; this.value+= this.ctrlchar; }
 }
 function Correct() {
   if (this.charmap.maxchrlen || !document.all) return 0;
@@ -128,8 +128,8 @@ function Correct() {
 function findCharToChange(type) {
   var lastchars= this.charmap.lastCharsOf(this.value, 5);
   var i= 0, c=lastchars[0][0], chr=0;
-  if (c=='\\') return [c,this.value.length-1,1];
-  if (type==15) while (!(chr=this.charmap.isVD(c))) {
+  if (c==='\\') return [c,this.value.length-1,1];
+  if (type===15) while (!(chr=this.charmap.isVD(c))) {
     if ((c < 'A') || (i>=4) || !(c=lastchars[++i][0])) return null;
   }
   else while( "cghmnptCGHMNPT".indexOf(c)>=0) {
@@ -138,18 +138,18 @@ function findCharToChange(type) {
   c = lastchars[0][0].toLowerCase();
   var pc = lastchars[1][0].toLowerCase();
   var ppc = lastchars[2][0].toLowerCase();
-  if (i==0 && type!=15) {
+  if (i===0 && type!==15) {
     if ( (chr=this.charmap.isVowel(lastchars[1][0]))
       && ("uyoia".indexOf(c)>=0) && !this.charmap.isUO(pc,c)
-      && !((pc=='o' && c=='a') || (pc=='u' && c=='y'))
-      && !((ppc=='q' && pc=='u') || (ppc=='g' && pc=='i')) ) ++i;
-    if (c=='a' && (type==9 || type==7)) i= 0;
+      && !((pc==='o' && c==='a') || (pc==='u' && c==='y'))
+      && !((ppc==='q' && pc==='u') || (ppc==='g' && pc==='i')) ) ++i;
+    if (c==='a' && (type===9 || type===7)) i= 0;
   }
   c= lastchars[i][0];
-  if ((i==0 || chr==0) && type!=15) chr= this.charmap.isVowel(c);
+  if ((i===0 || chr===0) && type!==15) chr= this.charmap.isVowel(c);
   if (!chr) return null;
   var clen= lastchars[i][1], isuo=0;
-  if ((i>0) && (type==7 || type==8 || type==11)) {
+  if ((i>0) && (type===7 || type===8 || type===11)) {
     isuo=this.charmap.isUO(lastchars[i+1][0],c);
     if (isuo) { chr=isuo; clen+=lastchars[++i][1]; isuo=1; }
   }
@@ -176,38 +176,38 @@ CVietCharMap.prototype.charAt= function(ind){
 }
 CVietCharMap.prototype.isVowel= function(chr){
   var i = 0;
-  while ((i<20) && (chr != this.chr_cache[i])) ++i;
+  while ((i<20) && (chr !== this.chr_cache[i])) ++i;
   if (i<20) return this.ind_cache[i];
   i = this.length-5;
-  while ((chr != this.charAt(i)) && i) --i;
+  while ((chr !== this.charAt(i)) && i) --i;
   this.caching(chr, i);
   return i;
 }
 CVietCharMap.prototype.isVD= function (chr){
   var ind = this.length-5;
-  while ((chr != this.charAt(ind)) && (ind < this.length)) ++ind;
+  while ((chr !== this.charAt(ind)) && (ind < this.length)) ++ind;
   return (ind<this.length)? ind: 0;
 }
 CVietCharMap.prototype.isUO= function (c1, c2){
   if (!c1 || !c2) return 0;
   var ind1 = this.isVowel(c1);
   var ci = (ind1-1)%12;
-  if ((ci!=9) && (ci!=10)) return 0;
+  if ((ci!==9) && (ci!==10)) return 0;
   var ind2 = this.isVowel(c2);
   ci = (ind2-1)%12;
-  if ((ci!=6) && (ci!=7) && (ci!=8)) return 0;
+  if ((ci!==6) && (ci!==7) && (ci!==8)) return 0;
   return [ind1,ind2];
 }
 CVietCharMap.prototype.getDau= function (ind, type){
   var accented= (ind < 25)? 0: 1;
   var ind_i= (ind-1) % 24 +1;
-  var charset= (type == 6)? 0 : type;
-  if ((type== 6) && !accented) return [0];
+  var charset= (type === 6)? 0 : type;
+  if ((type=== 6) && !accented) return [0];
   var newind= charset*24 + ind_i;
-  if (newind == ind) newind= ind_i;
+  if (newind === ind) newind= ind_i;
   var chr= this.charAt(newind);
   if (!chr) chr= this.lowerCaseOf(0,newind);
-  return [1, chr, newind>24 || type==6];
+  return [1, chr, newind>24 || type===6];
 }
 var map=[
 [7,7,7,8,8, 8,9,10,11,15],
@@ -216,31 +216,31 @@ var map=[
 ];
 CVietCharMap.prototype.getAEOWD= function(ind, type, isuo) {
   var c=0, i1=isuo? ind[0]: ind;
-  var vc1= (type==15)? (i1-1)%2 : (i1-1)%12;
+  var vc1= (type===15)? (i1-1)%2 : (i1-1)%12;
   if (isuo) {
     var base= ind[1]-(ind[1]-1)%12;
-    if (type==7 || type==11) c= this.charAt(i1-vc1+9)+this.charAt(base+7);
-    else if (type==8) c= this.charAt(i1-vc1+10)+this.charAt(base+8);
-    return [c!=0, c, 1];
+    if (type===7 || type===11) c= this.charAt(i1-vc1+9)+this.charAt(base+7);
+    else if (type===8) c= this.charAt(i1-vc1+10)+this.charAt(base+8);
+    return [c!==0, c, 1];
   }
   var i= -1, shift= 0, del= 0;
-  while (shift==0 && ++i<map[0].length) {
-    if (map[0][i]==type) {
-      if(map[1][i]==vc1) shift= map[2][i]-vc1;
-      else if(map[2][i]==vc1) shift= map[1][i]-vc1;
+  while (shift===0 && ++i<map[0].length) {
+    if (map[0][i]===type) {
+      if(map[1][i]===vc1) shift= map[2][i]-vc1;
+      else if(map[2][i]===vc1) shift= map[1][i]-vc1;
     }
   }
-  if (shift==0) {
-    if (type==7 && (vc1==2 || vc1==8)) shift=-1;
-    else if ((type==9 && vc1==2) || (type==11 && vc1==8)) shift=-1;
-    else if (type==8 && (vc1==1 || vc1==7)) shift=1;
+  if (shift===0) {
+    if (type===7 && (vc1===2 || vc1===8)) shift=-1;
+    else if ((type===9 && vc1===2) || (type===11 && vc1===8)) shift=-1;
+    else if (type===8 && (vc1===1 || vc1===7)) shift=1;
     del= 1;
   } else del=(shift>0);
   i1 += shift;
   var chr= this.charAt(i1);
   if (i1<145) this.caching(chr, i1);
   if (!chr) chr= this.lowerCaseOf(0, i1);
-  return [shift!=0, chr, del];
+  return [shift!==0, chr, del];
 }
 CVietCharMap.prototype.lastCharsOf= function(str, num){
   if (!num) return [str.charAt(str.length-1),1];
@@ -309,7 +309,7 @@ function CAllKeys() {
 }
 
 
-if (typeof(initCharMap) != 'undefined') {
+if (typeof(initCharMap) !== 'undefined') {
   initCharMap = selectMap;
   if (theTyper) theTyper.charmap = initCharMap();
   vumaps = 1;
@@ -352,10 +352,10 @@ this.register= function (constructor) {
 }
 this.getMap= function(id) {
   var ind= this.length-1;
-  if (typeof(id)=='number') { ind= id; }
+  if (typeof(id)==='number') { ind= id; }
   else {
     id= id.toUpperCase();
-    while((ind>0) && (this.names[ind].toUpperCase()!=id)) { --ind; }
+    while((ind>0) && (this.names[ind].toUpperCase()!==id)) { --ind; }
   }
   if(!ind || (ind>=this.length)) { return new CVietUniCodeMap(); }
   return eval(this.constructors[ind]);
@@ -376,7 +376,7 @@ CVietCharMap.prototype.lowerCaseOf = function (chr, ind) {
 CVietCharMap.prototype.indexOf = function (chr,isnumber) {
   var c = isnumber? String.fromcharCode(chr) : chr;
   var ind = this.length-1;
-  while ((c != this.charAt(ind)) && (ind > 0)) --ind;
+  while ((c !== this.charAt(ind)) && (ind > 0)) --ind;
   return ind;
 }
 CVietCharMap.prototype.regExpAt = function (i) {
@@ -643,7 +643,7 @@ return map;
 // const initCharMap = function () { return new CVietUniCodeMap(); }
 
 function parseMapID(param) {
-  if (typeof(param)=='number') return (param+1);
+  if (typeof(param)==='number') return (param+1);
   else if (/^\d+$/g.test(param)) return parseInt(param,10);
   else return param;
 }

@@ -1,20 +1,19 @@
-import { Select, Form, Input, Button, Tabs, Checkbox } from "antd"
+import { Select, Form, Input, Button, Checkbox } from "antd"
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
-import TextArea from "antd/lib/input/TextArea";
+// import { useQuery, gql } from "@apollo/client";
+// import TextArea from "antd/lib/input/TextArea";
 import { FormInstance } from 'antd/lib/form';
 
 const formRef = React.createRef<FormInstance>();
 
-const GET_LOAI_CONG_TRINH = gql`
-query {
-    maukhoiluongs {
-        id
-        tenBoPhan
-        loaiCongTrinh
-      }
-}
-`
+// const GET_LOAI_CONG_TRINH = gql`
+// query {
+//     maukhoiluongs {
+//         id
+//         tenBoPhan
+//         loaiCongTrinh
+//       }
+// }`
 const FormLoaiCongTrinh = () => {
     return (
         <Form ref={formRef} onFinish={() => { }}>
@@ -59,4 +58,4 @@ const FormLoaiCongTrinh = () => {
     )
 }
 
-export default FormLoaiCongTrinh
+export default FormLoaiCongTrinh;

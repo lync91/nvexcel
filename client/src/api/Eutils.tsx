@@ -1,11 +1,11 @@
 import { AsyncConstructor } from 'async-constructor';
-import { reduce, map } from "async";
+import { reduce } from "async";
 import { getPageType, getOrientationType } from "./mapIndex";
-import { ws, ee } from './nvExcel';
+// import { ws, ee } from './nvExcel';
 import { HAO_PHI_VAT_TU_NAME, TIEN_LUONG_SHEET_NAME } from '../constants/named';
 import { sheetMap } from "../constants/map";
 import { sheetChanged, onActivate, onSelectionChanged } from "./wsEvents"
-import { WORKSHEET_SELECTION_CHANGED } from "../constants/eventName";
+// import { WORKSHEET_SELECTION_CHANGED } from "../constants/eventName";
 import { toLetter, addrParser, columnIndex } from "./lib";
 import { addressTypes } from "./types";
 
