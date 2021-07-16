@@ -1,5 +1,6 @@
 import { PlusOutlined } from "@ant-design/icons/lib/icons";
 import { Button, List, Skeleton, Form, Select, FormInstance } from "antd";
+import { LoaiCongTrinh } from "../../Graphql/khoiluong";
 import { ws } from "../../api/nvExcel";
 import React, { useState } from "react";
 const formRef = React.createRef<FormInstance>();
@@ -10,7 +11,8 @@ const defState = {
 }
 
 function TabThuVienKL() {
-  const [state, setState] = useState(defState)
+  const [state, setState] = useState(defState);
+  const { loading, error, data } = LoaiCongTrinh();
   function _onFinish(value: any) {
 
   }
@@ -32,7 +34,7 @@ function TabThuVienKL() {
   };
   return (
     <>
-      <FormThuVien onFinish={() => _onFinish("")} />
+      <FormThuVien lstLoaiCongTrinh={data ? data.loaicongtrinhs : []} onFinish={() => _onFinish("")} />
       <List
         className="demo-loadmore-list"
         size="small"
@@ -61,13 +63,13 @@ function TabThuVienKL() {
 
 export default TabThuVienKL;
 
-function FormThuVien({ onFinish }: any) {
+function FormThuVien({ onFinish, lstLoaiCongTrinh }: any) {
   return (
     <Form ref={formRef} onFinish={() => onFinish()}>
       <Form.Item label="Loại công trình" name="loaiCongTrinh">
         <Select
           showSearch
-          // options={state.lstLoaiCongTrinh}
+          options={lstLoaiCongTrinh}
           placeholder="Chọn loại công trình"
           optionFilterProp="children"
           // onSelect={(val: string) => _selectLoaiCongTrinh(val)}

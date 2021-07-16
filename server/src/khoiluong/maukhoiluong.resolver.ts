@@ -1,6 +1,6 @@
 import { Resolver, ResolveProperty, Query, Mutation, Args } from '@nestjs/graphql';
 import { mauKhoiLuongService } from './maukhoiluong.service';
-import { CatType1, MauKhoiLuongType } from './dto/khoiluong.dto';
+import { MauKhoiLuongType, LoaiCongTrinhType } from './dto/khoiluong.dto';
 import { MauKhoiLuongInPut } from './inputs/khoiluong.input';
 
 @Resolver()
@@ -14,10 +14,9 @@ export class mauKhoiLuongResolver {
     
     return res
   }
-  @Query(() => [MauKhoiLuongType])
+  @Query(() => [LoaiCongTrinhType])
   async loaicongtrinhs() {
     const res = await this.mauKhoiLuongService.getLoaiCongTrinhs();
-    console.log(res);
     return res
   }
   @Mutation(() => MauKhoiLuongType)

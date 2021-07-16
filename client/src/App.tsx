@@ -8,32 +8,16 @@ import {
 import history from "./history";
 import "antd/dist/antd.css";
 import "./App.css";
-import { Layout, Menu, Button, Empty, Drawer } from "antd";
+import { Layout, Button, Empty, Drawer } from "antd";
 import { Hook, Console, Decode } from "console-feed";
-
-import { BugOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-// import { AppContext } from "./contexts/AppContext";
-// import socket from "./socket";
 import { ws } from "./api/nvExcel";
 import { DAU_VAO_OBJECT } from "./constants/values";
 import NavMenu from "./components/NavMenu";
 import { useWindowSize, Size } from "./windowSize";
 
-import {
-  ApolloProvider,
-  ApolloClient,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
-
-// import { ApolloProvider } from 'react-apollo';
-// import { gql } from '@apollo/client';
-// import client from "./apollo";
-
-const client = new ApolloClient({
-  uri: "/api",
-  cache: new InMemoryCache(),
-});
+import { ApolloProvider } from "@apollo/client";
+import { AppHeader } from "./components/AppHeader";
+import client from "./apollo";
 const CharConvert = React.lazy(() => import("./containers/CharConvert"));
 const PageFormat = React.lazy(() => import("./containers/PageFormat"));
 const PageFormatG8 = React.lazy(() => import("./containers/PageFormatG8"));
@@ -125,30 +109,7 @@ const App = () => {
             </Button>
           </Empty>
         </div>
-        <Header className="header" style={{ padding: 0 }}>
-          <div className="btn-menu" onClick={() => toggle()}>
-            <MenuUnfoldOutlined />
-          </div>
-          <div>
-            <Menu
-              className="header-menu"
-              theme="dark"
-              mode="horizontal"
-              defaultSelectedKeys={["2"]}
-            >
-              {/* <Menu.Item key="1" onClick={() => onToggleMenu()}><MenuUnfoldOutlined /></Menu.Item> */}
-              <Menu.Item key="2" onClick={() => console.log("OK")}>
-                nav 2
-              </Menu.Item>
-              <Menu.Item key="3" onClick={() => console.log("OK1")}>
-                nav 3
-              </Menu.Item>
-            </Menu>
-          </div>
-          <div className="btn-logs" onClick={toggleLogs}>
-            <BugOutlined />
-          </div>
-        </Header>
+        <AppHeader toggle={toggle} toggleLogs={toggleLogs} />
         <div
           style={{
             position: "relative",

@@ -9,12 +9,6 @@ input CatInput {
   breed: String!
 }
 
-input CatInput1 {
-  name: String!
-  age: Int!
-  breed: String!
-}
-
 type CatType {
   id: ID!
   name: String!
@@ -22,11 +16,9 @@ type CatType {
   breed: String!
 }
 
-type CatType1 {
+type LoaiCongTrinhType {
   id: ID!
-  name: String!
-  age: Int!
-  breed: String!
+  value: String!
 }
 
 input MauKhoiLuongInPut {
@@ -44,17 +36,12 @@ type MauKhoiLuongType {
 
 type Mutation {
   createCat(input: CatInput!): CatType!
-  createCat1(input: CatInput1!): CatType1!
   addTodo(type: String!): String!
   createMauKhoiLuong(input: MauKhoiLuongInPut!): MauKhoiLuongType!
 }
 
 type Query {
-  hello: String!
-  hello1: String!
   cats: [CatType!]!
-  hello11: String!
-  hello111: String!
   maukhoiluongs: [MauKhoiLuongType!]!
-  loaicongtrinhs: [MauKhoiLuongType!]!
+  loaicongtrinhs: [LoaiCongTrinhType!]!
 }

@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { mauKhoiLuong } from './interfaces/khoiluong.interface';
+import { mauKhoiLuong, loaiCongTrinh } from './interfaces/khoiluong.interface';
 import { MauKhoiLuongInPut } from './inputs/khoiluong.input';
 
 @Injectable()
@@ -17,10 +17,10 @@ export class mauKhoiLuongService {
     const res = await this.mauKhoiLuongModel.find().exec();
     return res;
   }
-  async getLoaiCongTrinhs(): Promise<mauKhoiLuong[]> {
+  async getLoaiCongTrinhs(): Promise<loaiCongTrinh[]> {
     return await this.mauKhoiLuongModel.aggregate()
     .group({_id: '$loaiCongTrinh'})
-    .project({loaiCongTrinh: '$_id'})
+    .project({value: '$_id'})
     .sort({_id: 1}).exec()
   }
 }

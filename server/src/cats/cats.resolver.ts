@@ -7,16 +7,6 @@ import { CatInput } from './inputs/cat.input';
 export class CatsResolver {
   constructor(private readonly catsService: CatsService) {}
 
-  @Query(() => String)
-  async hello() {
-    return 'hello';
-  }
-
-  @Query(() => String)
-  async hello1() {
-    return 'hello';
-  }
-
   @Query(() => [CatType])
   async cats() {
     return this.catsService.findAll();
