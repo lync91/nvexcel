@@ -74,11 +74,20 @@
   color: aliceblue;
 }
 
-.btn-menu:hover {
+.btn-logs {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 36px;
+  padding-left: 11px;
+  color: aliceblue;
+}
+
+.btn-menu:hover, .btn-logs:hover {
   color: #fff;
   background: #1890ff;
 }
 
 .header-menu {
-  padding-left: 36px;
+  padding: 0 36px;
 }

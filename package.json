@@ -1,6 +1,22 @@
 {
+  "scripts": {
+    "client": "cd client && yarn start-dev",
+    "server": "cd server && yarn start:dev",
+    "client:install": "cd client && yarn",
+    "server:install": "cd server && yarn",
+    "dev:office": "office-addin-debugging start manifest.xml",
+    "run:install": "concurrently \"npm run client:install\" \"npm run server:install\" ",
+    "start:dev": "concurrently \"npm run client\" \"npm run server\" \"npm run dev:office\" "
+  },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "office-addin-debugging": "^4.2.1",
     "office-addin-dev-certs": "^1.6.1"
-  }
+  },
+  "name": "nvexcel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lync91/nvexcel.git",
+  "author": "lync91 <mr.lync91@gmail.com>",
+  "license": "MIT"
 }

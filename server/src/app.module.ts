@@ -13,7 +13,7 @@ import { khoiLuongModule } from './khoiluong/khoiluong.module';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
     }),
-    MongooseModule.forRoot('mongodb://192.168.0.11/mydb'),
+    MongooseModule.forRoot('mongodb://192.168.0.11/thietke'),
   ],
   controllers: [AppController],
   providers: [AppService],

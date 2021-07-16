@@ -20,7 +20,7 @@ export interface AppProps {
 }
 
 export interface AppStates {
-    srcKey: string;
+  srcKey: string;
 	descKey: string;
 }
 
@@ -103,10 +103,4 @@ export class CharConvert extends Component<AppProps, AppStates> {
 		);
 	}
 }
-// const mapStateToProps = (state: any) => {
-// 	return {
-// 		srcKey: state.charConverter.srcKey,
-// 		descKey: state.charConverter.descKey
-// 	}
-// }
 export default CharConvert

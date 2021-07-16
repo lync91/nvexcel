@@ -89,9 +89,8 @@ export class wsObject extends AsyncConstructor {
 	async currentWs(name: string) {
 		this.name = name;
 		this.ws = this.context!.workbook.worksheets.getItemOrNullObject(name!)
-		this.ws.load('id, name');
-		await this.context.sync();
-		return this.ws.id;
+		await this.ws.load('id, name');
+		return this.context.sync();
 	}
 	async getActive() {
 		this.ws = await this.context!.workbook.worksheets.getActiveWorksheet();
