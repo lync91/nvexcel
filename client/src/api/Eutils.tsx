@@ -153,12 +153,17 @@ export class wsObject extends AsyncConstructor {
 	autoSetPrintArea() {
 		this.ws?.pageLayout.setPrintArea("A:" + this.lastCol.col)
 	}
-	setPrintArea(address: string) {
-		this.ws?.pageLayout.setPrintArea(address)
+	async setPrintArea(address: string) {
+		return await this.ws?.pageLayout.setPrintArea(address)
 	}
 	async setFont(fontName: string, address: string | undefined = undefined) {
+		console.log('set Font');
+		console.log(fontName);
+		
 		const addr = address ? address : 'A:Z';
-		this.ws!.getRange(addr).format.font.name = fontName;
+		const rg = await this.ws!.getRange(addr)
+		rg.format.font.name = fontName;
+		return await this.context.sync();
 	}
 	async setFill(address: string, color: string) {
 		this.ws!.getRange(address).format.fill.color = color;
@@ -534,17 +539,18 @@ export class wsObject extends AsyncConstructor {
 		conds.map((e, i) => this.setCustomConditionalFormat(e.address, e.formula, e.color, e.bold, e.italic, e.border));
 	}
 	async newSheetfromObject(obj: any) {
+		console.log('OBJECT', obj);
 		if (obj.name) {
 			const shId = await this.addSheet(obj.name)
-			await this.currentWs(obj.name).then(x => {
+			await this.currentWs(obj.name).then(async () => {
 				if (obj.contents) {
-					this.sheetContents(obj.contents)
+					await this.sheetContents(obj.contents)
 				}
-				if (obj.font) this.setFont(obj.font, obj.printArea ? obj.printArea : 'A:Z');
 				if (obj.printArea) this.setPrintArea(obj.printArea)
 				if (obj.pageSize) this.setPaperType(obj.pageSize)
 				if (obj.orientation) this.setOrientation(obj.orientation)
 				if (obj.defaultConditionalFormat) this.setConditionalFormats(obj.defaultConditionalFormat)
+				if (obj.font) this.setFont(obj.font, obj.printArea ? obj.printArea : 'A:Z');
 			})
 			this.activate();
 			this.updateProjectInfo(obj.name, shId);

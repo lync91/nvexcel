@@ -59,8 +59,8 @@ function TienLuong() {
     await ws.updateProjectInfo(TIEN_LUONG_SHEET_NAME, id);
     await ws?.activate();
     setState({ ...state, ...{ wsExits: true } });
-    ws?.addValues("A6", [["HM"]]);
-    ws?.addValues("A7", [["#"]]);
+    ws?.addValues("A7", [["HM"]]);
+    ws?.addValues("A8", [["#"]]);
   };
 
   const getDonGiaKhuVuc = (kv: string) => {
