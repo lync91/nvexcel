@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const { composeMongoose } = require('graphql-compose-mongoose');
 const { schemaComposer } = require('graphql-compose');
 
-var Schema = mongoose.Schema;
-var mauKhoiLuongSchema = new Schema({
+const Schema = mongoose.Schema;
+const mauKhoiLuongSchema = new Schema({
     loaiCongTrinh: String,
     tenBoPhan: String,
     data: String

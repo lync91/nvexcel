@@ -1,12 +1,12 @@
 {
   "scripts": {
     "client": "cd client && yarn start-dev",
-    "server": "cd server && yarn start:dev",
+    "server": "cd server && yarn dev",
     "client:install": "cd client && yarn",
     "server:install": "cd server && yarn",
     "dev:office": "office-addin-debugging start manifest.xml",
     "run:install": "concurrently \"npm run client:install\" \"npm run server:install\" ",
-    "start:dev": "concurrently \"npm run client\" \"npm run server\" \"npm run dev:office\" "
+    "dev": "concurrently \"yarn client\" \"yarn server\" \"npm run dev:office\" "
   },
   "devDependencies": {
     "concurrently": "^6.2.0",

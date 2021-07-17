@@ -44,7 +44,7 @@ const App = () => {
   const [state, setStateValues] = useState(defState);
   const [visible, setvisible] = useState(false);
   const [nvlogs, setLogs] = useState(defLogs);
-  const [showLogs, setShowLogs] = useState(false);
+  const [showLogs, setShowLogs] = useState(true);
   const size: Size = useWindowSize();
   const el = useRef(null);
   useEffect(() => {
@@ -70,7 +70,7 @@ const App = () => {
       setvisible(isVis);
     }
   };
-  
+
   const toggleLogs = () => {
     setShowLogs(!showLogs);
     setTimeout(() => {
@@ -113,19 +113,11 @@ const App = () => {
         <div
           style={{
             position: "relative",
-            height: size.height ? size.height - 36 : "100%",
+            height: size.height ? size.height - 36 - (showLogs ? 250 : 0) : "100%",
             overflow: "auto",
           }}
         >
-          <div
-            className="logs"
-            hidden={!showLogs}
-            style={{ backgroundColor: "#242424" }}
-          >
-            <Console logs={nvlogs} variant="dark" />
-            <div id={"el"} ref={el} />
-          </div>
-          <div hidden={showLogs}>
+          <div>
             <Router history={history}>
               <Suspense fallback="Đang tải">
                 <section className="App-body">
@@ -160,6 +152,22 @@ const App = () => {
           >
             <NavMenu onSelected={_onMenuSelected} />
           </Drawer>
+        </div>
+        <div
+          hidden={!showLogs}
+          style={{
+            position: "relative",
+            height: 250,
+            overflow: "auto",
+          }}
+        >
+          <div
+            className="logs"
+            style={{ backgroundColor: "#242424" }}
+          >
+            <Console logs={nvlogs} variant="dark" />
+            <div id={"el"} ref={el} />
+          </div>
         </div>
       </div>
     </ApolloProvider>
