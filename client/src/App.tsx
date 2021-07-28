@@ -53,7 +53,13 @@ const App = () => {
       const kref: any = el.current;
       kref.scrollIntoView({ block: "end", behavior: "smooth" });
     });
+    _prepair()
   }, []);
+
+  async function _prepair() {
+    const info = await ws.getPropeties();
+    console.log('info', info);
+  }
   const onClose = () => {
     setvisible(false);
   };
@@ -78,7 +84,6 @@ const App = () => {
       kref.scrollIntoView({ block: "end" });
     }, 200);
   };
-
   const _onMenuSelected = () => {
     setvisible(false);
   };
@@ -183,3 +188,4 @@ function Home() {
 }
 
 export default App;
+

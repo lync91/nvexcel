@@ -33,6 +33,8 @@ function TienLuong() {
       }
     );
     const name = await ws?.checkWsExits(TIEN_LUONG_SHEET_NAME);
+    console.log(name);
+    
     if (name) {
       await ws?.currentWs(TIEN_LUONG_SHEET_NAME);
       ws?.activate();
@@ -92,9 +94,9 @@ function TienLuong() {
         </Empty>
       </div>
       <Tabs hidden={!state.wsExits} defaultActiveKey="1">
-        <TabPane tab="Menu" key="1">
+        {/* <TabPane tab="Menu" key="1">
           <TabTaoMauKhoiLuong />
-        </TabPane>
+        </TabPane> */}
         <TabPane tab="Thư viện" key="2">
           <TabThuVienKL />
         </TabPane>

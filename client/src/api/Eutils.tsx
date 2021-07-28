@@ -395,6 +395,7 @@ export class wsObject extends AsyncConstructor {
 		const customProperty = docProperties.getItemOrNullObject(TIEN_LUONG_SHEET_NAME)
 		customProperty.load("key, value")
 		await this.context.sync();
+		return customProperty;
 	}
 
 	async updateProjectInfo(key: string, value: any) {
@@ -412,17 +413,13 @@ export class wsObject extends AsyncConstructor {
 		if (customProperty.value) {
 			this.projectInfo = JSON.parse(customProperty.value)
 			console.log(this.projectInfo);
-
+			return this;
 		}
 	}
 
 	async getRangeName() {
-		console.log('OKE');
-		
 		const names = this.ws.names.load();
 		await this.context.sync();
-		console.log(names);
-		
 		return names;
 	}
 
