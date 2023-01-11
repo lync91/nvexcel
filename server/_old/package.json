@@ -17,7 +17,7 @@
     "graphql": "^15.4.0",
     "graphql-compose": "^7.23.0",
     "graphql-compose-mongoose": "^9.0.0",
-    "knex": "^0.21.1",
+    "knex": "^2.4.0",
     "mongoose": "^5.10.17",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
